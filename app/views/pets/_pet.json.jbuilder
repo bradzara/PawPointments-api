@@ -4,6 +4,10 @@ json.owner do
   json.extract! pet.owner, :id, :name, :email, :phone, :address
 end
 
+json.user do
+  json.extract! pet.user, :id, :username, :first_name, :last_name, :email, :phone
+end
+
 json.appointments pet.appointments do |appointment|
   json.extract! appointment, :id, :date, :start_time, :end_time, :description, :notes
 end

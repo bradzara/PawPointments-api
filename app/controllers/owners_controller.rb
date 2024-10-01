@@ -1,5 +1,6 @@
 class OwnersController < ApplicationController
-
+  before_action :authenticate_user
+  
   def index
     @owners = Owner.all
     render :index

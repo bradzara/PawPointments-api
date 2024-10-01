@@ -1,4 +1,5 @@
 class AppointmentsController < ApplicationController
+  before_action :authenticate_user
 
   def index
     @appointments = Appointment.all
@@ -11,7 +12,7 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    @appointment = Appointment.new(appointment_params)
+    @appointment = @pet.appointments.build(appointment_params)
 
     if @appointment.save
       render :show, status: :created

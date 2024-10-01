@@ -1,7 +1,8 @@
 class PetsController < ApplicationController
+before_action :authenticate_user
 
 def index
-  @pets = Pet.all
+  @pets = current_user.pets.includes(:owner)
   render :index
 end
 
@@ -11,7 +12,7 @@ def show
 end
 
 def create
-  @pet = Pet.new(pet_params)
+  @pet = current_user.pets.build(pet_params)
 
   if @pet.save
     render json: @pet, status: :created
@@ -38,6 +39,6 @@ end
 private
 
 def pet_params
-  params.permit(:name, :breed, :age, :owner_id, :notes, :image)
+  params.permit(:name, :breed, :age, :owner_id, :notes, :image, :user_id, owner_attributes: [:name, :email, :phone, :address])
 end
 end

@@ -1,7 +1,6 @@
 class Owner < ApplicationRecord
   #Associations
   has_many :pets, dependent: :destroy
-  belongs_to :user
 
   #Validations
   validates :name, presence: true
