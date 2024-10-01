@@ -8,7 +8,7 @@ json.appointments pet.appointments do |appointment|
   json.extract! appointment, :id, :date, :start_time, :end_time, :description, :notes
 end
 
-if @pet.image.attached?
+if pet.image.attached?
   json.image_url url_for(pet.image)
 else
   json.image_url nil
