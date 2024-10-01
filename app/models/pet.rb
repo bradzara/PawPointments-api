@@ -1,5 +1,6 @@
 class Pet < ApplicationRecord
   #Associations
+  belongs_to :user
   belongs_to :owner
   has_many :appointments
 
