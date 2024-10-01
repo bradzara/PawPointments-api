@@ -7,4 +7,16 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  
+  #Routes for pets
+  # get "/pets" => "pets#index"
+  # get "/pets/:id" => "pets#show"
+  # post "/pets" => "pets#create"
+  # patch "/pets/:id" => "pets#update"
+  # delete "pets/:id" => "pets#destroy"
+  resources :pets do
+    resources :appointments, only: [:index, :show, :create, :update, :destroy]
+  end
+
+
 end
