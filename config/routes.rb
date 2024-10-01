@@ -9,19 +9,19 @@ Rails.application.routes.draw do
   # root "posts#index"
   
   #Routes for pets
-  # get "/pets" => "pets#index"
-  # get "/pets/:id" => "pets#show"
-  # post "/pets" => "pets#create"
-  # patch "/pets/:id" => "pets#update"
-  # delete "pets/:id" => "pets#destroy"
   resources :pets do
     resources :appointments, only: [:index, :show, :create, :update, :destroy]
   end
 
-
+  #Routes for owners
   resources :owners do
     resources :pets, only: [:index, :show, :create, :update, :destroy]
   end
 
+  #Routes for appointments
   resources :appointments, only: [:index, :show, :create, :update, :destroy]
+
+  #Routes for Users and session
+  resources :users, only: [:create, :update, :destroy]
+  post "/sessions" => "sessions#create"
 end
