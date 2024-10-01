@@ -33,15 +33,15 @@ def destroy
   head :no_content
 end
 
-  private
+private
 
-  def set_pet
-    @pet = Pet.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render json: { error: "Pet not found" }, status: :not_found
-  end
+def set_pet
+  @pet = Pet.find(params[:id])
+rescue ActiveRecord::RecordNotFound
+  render json: { error: "Pet not found" }, status: :not_found
+end
 
-  def pet_params
-    params.permit(:name, :breed, :age, :owner_id, :notes, :image)
-  end
+def pet_params
+  params.permit(:name, :breed, :age, :owner_id, :notes, :image)
+end
 end

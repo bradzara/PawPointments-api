@@ -1,2 +1,9 @@
-json.extract! appointment, :id, :created_at, :updated_at
-json.url appointment_url(appointment, format: :json)
+json.extract! appointment, :id, :pet_id, :date, :start_time, :end_time, :description, :notes, :created_at, :updated_at
+
+json.pet do
+  json.extract! appointment.pet, :id, :name, :breed, :age
+end
+
+json.owner do
+  json.extract! appointment.pet.owner, :id, :name, :email
+end

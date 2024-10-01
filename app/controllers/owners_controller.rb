@@ -35,11 +35,11 @@ class OwnersController < ApplicationController
   
   private
 
-    def set_owner
-      @owner = Owner.find(params[:id])
-    end
+  def set_owner
+    @owner = Owner.find(params[:id])
+  end
 
-    def owner_params
-      params.permit(:name, :email, :phone, :address)
-    end
+  def owner_params
+    params.permit(:name, :email, :phone, :address)
+  end
 end
