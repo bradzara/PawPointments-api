@@ -1,13 +1,13 @@
 class OwnersController < ApplicationController
-  before_action :set_owner, only: [:show, :update, :destroy]
 
   def index
     @owners = Owner.all
-    render json: @owners
+    render :index
   end
 
   def show
-    render json: @owner
+    @owner = Owner.find_by(id: params[:id])
+    render :show
   end
 
   def create
@@ -21,6 +21,7 @@ class OwnersController < ApplicationController
   end
 
   def update
+    @owner = Owner.find_by(id: params[:id])
     if @owner.update(owner_params)
       render json: @owner
     else
@@ -29,15 +30,12 @@ class OwnersController < ApplicationController
   end
 
   def destroy
-    @owner = Owner.destroy
-    head :no_content
+    @owner = Owner.find_by(id: params[:id])
+    @owner.destroy
+    render json: { message: "Owner succesfully deleted" }
   end
   
   private
-
-  def set_owner
-    @owner = Owner.find(params[:id])
-  end
 
   def owner_params
     params.permit(:name, :email, :phone, :address)

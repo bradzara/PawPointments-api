@@ -1,5 +1,4 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: [:show, :update, :destroy]
 
   def index
     @appointments = Appointment.all
@@ -7,6 +6,7 @@ class AppointmentsController < ApplicationController
   end
 
   def show
+    @appointment = Appointment.find_by(id: params[:id])
     render :show
   end
 
@@ -21,6 +21,7 @@ class AppointmentsController < ApplicationController
   end
 
   def update
+    @appointment = Appointment.find_by(id: params[:id])
     if @appointment.update(appointment_params)
       render :show
     else
@@ -29,15 +30,12 @@ class AppointmentsController < ApplicationController
   end
 
   def destroy
+    @appointment = Appointment.find_by(id: params[:id])
     @appointment.destroy
-    head :no_content
+    render json: { message: "Appointment succesfully deleted" }
   end
 
   private
-
-  def set_appointment
-    @appointment = Appointment.find(params[:id])
-  end
 
   def appointment_params
     params.permit(:pet_id, :date, :start_time, :end_time, :description, :notes)

@@ -1,5 +1,4 @@
 class PetsController < ApplicationController
-before_action :set_pet, only: [:show, :update, :destroy]
 
 def index
   @pets = Pet.all
@@ -8,6 +7,7 @@ end
 
 def show
   @pet = Pet.find_by(id: params[:id])
+  render :show
 end
 
 def create
@@ -21,6 +21,7 @@ def create
 end
 
 def update
+  @pet = Pet.find_by(id: params[:id])
   if @pet.update(pet_params)
     render json: @pet, status: :ok
   else
@@ -29,17 +30,12 @@ def update
 end
 
 def destroy
+  @pet = Pet.find_by(id: params[:id])
   @pet.destroy
-  head :no_content
+  render json: { message: "Pet succesfully deleted" }
 end
 
 private
-
-def set_pet
-  @pet = Pet.find(params[:id])
-rescue ActiveRecord::RecordNotFound
-  render json: { error: "Pet not found" }, status: :not_found
-end
 
 def pet_params
   params.permit(:name, :breed, :age, :owner_id, :notes, :image)
