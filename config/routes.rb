@@ -19,4 +19,9 @@ Rails.application.routes.draw do
   end
 
 
+  resources :owners do
+    resources :pets, only: [:index, :show, :create, :update, :destroy]
+  end
+
+
 end
