@@ -70,3 +70,4 @@ end
 gem 'rack-cors'
 gem 'jwt'
 gem 'faker'
+gem 'open-uri'
