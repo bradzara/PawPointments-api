@@ -22,6 +22,6 @@ Rails.application.routes.draw do
   resources :appointments, only: [:index, :show, :create, :update, :destroy]
 
   #Routes for Users and session
-  resources :users, only: [:create, :update, :destroy, :index]
+  resources :users, only: [:create, :update, :destroy]
   post "/sessions" => "sessions#create"
 end

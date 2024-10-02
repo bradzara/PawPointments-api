@@ -7,7 +7,3 @@ end
 json.owner do
   json.extract! appointment.pet.owner, :id, :name, :email
 end
-
-json.user do
-  json.extract! appointment.pet.user, :id, :username, :first_name, :last_name, :email, :phone
-end
