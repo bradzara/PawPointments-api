@@ -2,8 +2,8 @@ class AppointmentsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @appointments = Appointment.all
-    render :index
+    @appointments = Appointment.includes(:pet).all
+    render json: @appointments.as_json(include: :pet)
   end
 
   def show

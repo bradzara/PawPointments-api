@@ -4,6 +4,6 @@ class Owner < ApplicationRecord
 
   #Validations
   validates :name, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
   validates :phone, presence: true
 end
