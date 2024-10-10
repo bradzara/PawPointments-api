@@ -12,7 +12,7 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    @appointment = @pet.appointments.build(appointment_params)
+    @appointment = Appointment.new(appointment_params)
 
     if @appointment.save
       render :show, status: :created
@@ -39,6 +39,6 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.permit(:pet_id, :date, :start_time, :end_time, :description, :notes)
+    params.require(:appointment).permit(:pet_id, :date, :start_time, :end_time, :description, :notes)
   end
 end
