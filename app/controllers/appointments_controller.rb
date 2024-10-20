@@ -3,15 +3,18 @@ class AppointmentsController < ApplicationController
 
   def index
     @appointments = Appointment.includes(:pet).all
-    render json: @appointments.as_json(include: :pet)
+    render json: @appointments.as_json(include: :pet, methods: [:formatted_start_time, :formatted_end_time])
   end
 
   def show
     @appointment = Appointment.find_by(id: params[:id])
-    render :show
+    render json: @appointment.as_json(include: :pet, methods: [:formatted_start_time, :formatted_end_time])
   end
 
   def create
+    parsed_start_time = Time.parse(appointment_params[:start_time]).strftime("%H:%M")
+    parsed_end_time = Time.parse(appointment_params[:end_time]).strftime("%H:%M")
+    
     @appointment = Appointment.new(appointment_params)
 
     if @appointment.save

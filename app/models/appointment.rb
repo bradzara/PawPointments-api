@@ -16,4 +16,13 @@ class Appointment < ApplicationRecord
       errors.add(:end_time, "must be after the start time")
     end
   end
+
+  # Methods to format time for JSON response
+  def formatted_start_time
+    start_time.strftime("%I:%M %p")
+  end
+
+  def formatted_end_time
+    end_time.strftime("%I:%M %p")
+  end
 end

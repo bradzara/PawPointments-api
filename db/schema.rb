@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_01_222649) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_11_070128) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,8 +45,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_01_222649) do
   create_table "appointments", force: :cascade do |t|
     t.integer "pet_id"
     t.date "date"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.time "start_time"
+    t.time "end_time"
     t.text "description"
     t.text "notes"
     t.datetime "created_at", null: false

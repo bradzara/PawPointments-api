@@ -24,4 +24,7 @@ Rails.application.routes.draw do
   #Routes for Users and session
   resources :users, only: [:create, :update, :destroy]
   post "/sessions" => "sessions#create"
+
+  #Routes for users
+  resources :users, only: [:show, :create, :update, :destroy]
 end
