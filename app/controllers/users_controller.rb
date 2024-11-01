@@ -5,26 +5,18 @@ class UsersController < ApplicationController
   end
   
   def create
-    user = User.new(
-      username: params[:username],
-      first_name: params[:first_name],
-      last_name: params[:last_name],
-      email: params[:email],
-      phone: params[:phone],
-      password: params[:password],
-      password_confirmation: params[:password_confirmation]
-    )
-    if user.save
-      render json: { message: "User created successfully" }, status: :created
+    @user = User.new(user_params)
+    if @user.save
+      render json: @user, status: :created
     else
-      render json: { errors: user.errors.full_messages }, status: :bad_request
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
   def update
     @user = User.find_by(id: params[:id])
     if @user.update(user_params)
-      render :show
+      render json: @pet, status: :ok
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -39,6 +31,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:id, :username, :first_name, :last_name, :email, :phone, :password, :password_confirmation)
+    params.permit(:id, :username, :first_name, :last_name, :email, :phone, :password, :password_confirmation, :profile_picture)
   end
 end

@@ -25,7 +25,6 @@ def create
   if @pet.save
     render json: @pet, status: :created
   else
-    Rails.logger.debug(@pet.errors.full_messages)
     render json: @pet.errors, status: :unprocessable_entity
   end
 end
@@ -42,7 +41,7 @@ end
 def destroy
   @pet = Pet.find_by(id: params[:id])
   @pet.destroy
-  render json: { message: "Pet succesfully deleted" }
+  render json: { message: "Pet has succesfully been deleted" }
 end
 
 private

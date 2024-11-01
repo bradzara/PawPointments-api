@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
-
+  has_one_attached :profile_picture
   has_many :pets
+  has_many :appointments
 
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }

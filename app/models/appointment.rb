@@ -1,6 +1,7 @@
 class Appointment < ApplicationRecord
   #Associations
   belongs_to :pet
+  belongs_to :user
 
   #Validations
   validates :date, presence: true
