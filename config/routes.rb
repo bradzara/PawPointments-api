@@ -8,23 +8,23 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   
-  #Routes for pets
-  resources :pets do
+  defaults format: :json do
+    #Routes for pets
+    resources :pets do
+      resources :appointments, only: [:index, :show, :create, :update, :destroy]
+    end
+
+    #Routes for owners
+    resources :owners do
+      resources :pets, only: [:index, :show, :create, :update, :destroy]
+    end
+
+    #Routes for appointments
     resources :appointments, only: [:index, :show, :create, :update, :destroy]
+
+    #Routes for Users and session
+    resources :users, only: [:create, :update, :destroy]
+    get '/users/current_user' => 'users#current_user'
+    post "/sessions" => "sessions#create"
   end
-
-  #Routes for owners
-  resources :owners do
-    resources :pets, only: [:index, :show, :create, :update, :destroy]
-  end
-
-  #Routes for appointments
-  resources :appointments, only: [:index, :show, :create, :update, :destroy]
-
-  #Routes for Users and session
-  resources :users, only: [:create, :update, :destroy]
-  post "/sessions" => "sessions#create"
-
-  #Routes for users
-  resources :users, only: [:show, :create, :update, :destroy]
 end
